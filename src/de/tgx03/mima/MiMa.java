@@ -16,7 +16,7 @@ public class MiMa implements Runnable {
     private int accu;
 
     public MiMa(String[] commands) {
-        this.commands = initializeCommands(commands, this);;
+        this.commands = initializeCommands(commands, this);
     }
 
     public MiMa(String[] commands, String[] data) {
