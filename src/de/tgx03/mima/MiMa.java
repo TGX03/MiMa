@@ -27,7 +27,7 @@ public class MiMa implements Runnable {
         }
     }
 
-    public void run() {
+    public synchronized void run() {
         int currentCommand = 0;
         while (!exit) {
             if (currentCommand >= commands.length) {
@@ -52,15 +52,18 @@ public class MiMa implements Runnable {
     }
 
     public String toString() {
-        Set<String> keys = map.keySet();
-        if (keys.size() == 0) {
-            return "";
+        ArrayList<String> elements;
+        synchronized (this) {
+            Set<String> keys = map.keySet();
+            if (keys.size() == 0) {
+                return "";
+            }
+            elements = new ArrayList<>(keys.size());
+            keys.forEach(key -> {
+                int value = map.get(key);
+                elements.add(key + ": " + value);
+            });
         }
-        ArrayList<String> elements = new ArrayList<>(keys.size());
-        keys.forEach(key -> {
-            int value = map.get(key);
-            elements.add(key + ": " + value);
-        });
         elements.sort(Comparator.naturalOrder());
         StringBuilder result = new StringBuilder(elements.get(0).length() * elements.size());
         String lineSeparator = System.getProperty("line.separator");
