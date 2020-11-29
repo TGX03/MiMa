@@ -25,6 +25,8 @@ public class MiMa implements Runnable {
     }
 
     public synchronized void run() {
+        this.exit = false;
+        this.forcedExit = false;
         int currentCommand = 0;
         while (!exit) {
             if (currentCommand >= commands.length) {
