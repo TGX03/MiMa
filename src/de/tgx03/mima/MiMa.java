@@ -2,10 +2,7 @@ package de.tgx03.mima;
 
 import de.tgx03.mima.commands.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class MiMa implements Runnable {
 
