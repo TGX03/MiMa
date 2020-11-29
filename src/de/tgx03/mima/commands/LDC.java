@@ -1,5 +1,8 @@
 package de.tgx03.mima.commands;
 
+/**
+ * The LDC command. Loads a constant value into the accu
+ */
 public class LDC extends Command {
 
     private static final int DATA_MAX = 524287;
@@ -7,6 +10,11 @@ public class LDC extends Command {
 
     private final int value;
 
+    /**
+     * Creates a new LDC command
+     *
+     * @param constant The constant to load into the accu
+     */
     public LDC(int constant) {
         super(null);
         if (constant > DATA_MAX || constant < DATA_MIN) {

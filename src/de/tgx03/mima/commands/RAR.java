@@ -1,7 +1,13 @@
 package de.tgx03.mima.commands;
 
+/**
+ * Represents the RAR command. It shifts all bits currently in the accu one bit to the right
+ */
 public class RAR extends Command {
 
+    /**
+     * You'll figure out yourself what this does
+     */
     public RAR() {
         super(null);
     }
