@@ -1,12 +1,12 @@
 package de.tgx03.mima.commands;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class XOR extends Command {
 
     private final String memoryAddress;
 
-    public XOR(String address, HashMap<String, Integer> map) {
+    public XOR(String address, Map<String, Integer> map) {
         super(map);
         this.memoryAddress = address;
     }

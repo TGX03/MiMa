@@ -1,14 +1,14 @@
 package de.tgx03.mima.commands;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Command {
 
     public static final int DONT_JUMP = -1;
 
-    protected final HashMap<String, Integer> map;
+    protected final Map<String, Integer> map;
 
-    protected Command(HashMap<String, Integer> map) {
+    protected Command(Map<String, Integer> map) {
         this.map = map;
     }
 

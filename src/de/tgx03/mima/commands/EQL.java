@@ -1,12 +1,12 @@
 package de.tgx03.mima.commands;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class EQL extends Command {
 
     private final String memoryAddress;
 
-    public EQL(String address, HashMap<String, Integer> map) {
+    public EQL(String address, Map<String, Integer> map) {
         super(map);
         this.memoryAddress = address;
     }

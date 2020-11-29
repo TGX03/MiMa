@@ -1,12 +1,12 @@
 package de.tgx03.mima.commands;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class ADD extends Command {
 
     private final String memoryAddress;
 
-    public ADD(String address, HashMap<String, Integer> map) {
+    public ADD(String address, Map<String, Integer> map) {
         super(map);
         this.memoryAddress = address;
     }

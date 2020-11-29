@@ -1,12 +1,12 @@
 package de.tgx03.mima.commands;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class OR extends Command {
 
     private final String memoryAddress;
 
-    public OR(String address, HashMap<String, Integer> map) {
+    public OR(String address, Map<String, Integer> map) {
         super(map);
         this.memoryAddress = address;
     }

@@ -1,12 +1,12 @@
 package de.tgx03.mima.commands;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class STV extends Command {
 
     private final String memoryAdress;
 
-    public STV(String address, HashMap<String, Integer> map) {
+    public STV(String address, Map<String, Integer> map) {
         super(map);
         this.memoryAdress = address;
     }
