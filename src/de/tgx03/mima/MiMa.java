@@ -35,7 +35,10 @@ public class MiMa implements Runnable {
                 forcedExit = true;
                 return;
             }
-            int[] commandResult = commands[currentCommand].run(accu);
+            int[] commandResult;
+            synchronized (map) {
+                commandResult = commands[currentCommand].run(accu);
+            }
             if (commands[currentCommand].updatesAccu()) {
                 accu = commandResult[0];
             }
@@ -53,7 +56,7 @@ public class MiMa implements Runnable {
 
     public String toString() {
         Set<Map.Entry<String, Integer>> keyPairs;
-        synchronized (this) {
+        synchronized (map) {
             keyPairs = map.entrySet();
         }
         ArrayList<String> elements = new ArrayList<>(keyPairs.size());
