@@ -52,17 +52,13 @@ public class MiMa implements Runnable {
     }
 
     public String toString() {
-        ArrayList<String> elements;
+        Set<Map.Entry<String, Integer>> keyPairs;
         synchronized (this) {
-            Set<String> keys = map.keySet();
-            if (keys.size() == 0) {
-                return "";
-            }
-            elements = new ArrayList<>(keys.size());
-            keys.forEach(key -> {
-                int value = map.get(key);
-                elements.add(key + ": " + value);
-            });
+            keyPairs = map.entrySet();
+        }
+        ArrayList<String> elements = new ArrayList<>(keyPairs.size());
+        for (Map.Entry<String, Integer> pair : keyPairs) {
+            elements.add(pair.getKey() + ": " + pair.getValue());
         }
         elements.sort(Comparator.naturalOrder());
         StringBuilder result = new StringBuilder(elements.get(0).length() * elements.size());
