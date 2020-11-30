@@ -147,6 +147,10 @@ public class MiMa implements Runnable {
         this.currentCommand = 0;
     }
 
+    /**
+     * Adds a new breakpoint to this MiMa
+     * @param breakpoint The number of the command to stop on
+     */
     public synchronized void addBreakpoint(int breakpoint) {
         if (this.breakpoints == null) {
             this.breakpoints = new ArrayList<>();
@@ -156,6 +160,10 @@ public class MiMa implements Runnable {
         }
     }
 
+    /**
+     * Adds multiple new breakpoints to this MiMa
+     * @param breakpoints The breakpoints to add
+     */
     public synchronized void addBreakpoints(Collection<Integer> breakpoints) {
         if (this.breakpoints == null) {
             this.breakpoints = breakpoints;
@@ -164,12 +172,20 @@ public class MiMa implements Runnable {
         }
     }
 
+    /**
+     * Remove a breakpoint from this MiMa
+     * @param breakpoint The number of the breakpoint to remove
+     */
     public synchronized void removeBreakpoint(int breakpoint) {
         if (this.breakpoints != null) {
             this.breakpoints.remove(breakpoint);
         }
     }
 
+    /**
+     * Removes multiple breakpoints from this MiMa
+     * @param breakpoints Th breakpoints to remove
+     */
     public synchronized void removeBreakpoints(Collection<Integer> breakpoints) {
         this.breakpoints.removeAll(breakpoints);
     }
@@ -181,6 +197,11 @@ public class MiMa implements Runnable {
         exit = true;
     }
 
+    /**
+     * Whether this MiMa has completely terminated. If the MiMa has only halted because of breakpoints,
+     * this returns false
+     * @return Whether the MiMa has terminated
+     */
     public boolean exited() {
         return this.exit;
     }
