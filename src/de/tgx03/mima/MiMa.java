@@ -16,6 +16,8 @@ public class MiMa implements Runnable {
     private boolean forcedExit = false;
     private int accu;
     int currentCommand = 0;
+    private Collection<Integer> breakpoints;
+    private boolean broke = false;
 
     /**
      * Creates a MiMa with its commands but no data
@@ -84,18 +86,12 @@ public class MiMa implements Runnable {
      * Executes this MiMa completely
      */
     public synchronized void run() {
-        while (!exit) {
+        while (!exit && (this.breakpoints == null || broke || !this.breakpoints.contains(currentCommand))) {
+            broke = false;
             runNextCommand();
         }
-    }
-
-    /**
-     * Execute this MiMa until the provided command is reached and then stop
-     * @param until The number of the command to halt on
-     */
-    public synchronized void run(int until) {
-        while (!exit && currentCommand != until) {
-            runNextCommand();
+        if (this.breakpoints.contains(currentCommand)) {
+            broke = true;
         }
     }
 
@@ -149,6 +145,33 @@ public class MiMa implements Runnable {
         this.exit = false;
         this.forcedExit = false;
         this.currentCommand = 0;
+    }
+
+    public synchronized void addBreakpoint(int breakpoint) {
+        if (this.breakpoints == null) {
+            this.breakpoints = new ArrayList<>();
+        }
+        if (!this.breakpoints.contains(breakpoint)) {
+            this.breakpoints.add(breakpoint);
+        }
+    }
+
+    public synchronized void addBreakpoints(Collection<Integer> breakpoints) {
+        if (this.breakpoints == null) {
+            this.breakpoints = breakpoints;
+        } else {
+            this.breakpoints.addAll(breakpoints);
+        }
+    }
+
+    public synchronized void removeBreakpoint(int breakpoint) {
+        if (this.breakpoints != null) {
+            this.breakpoints.remove(breakpoint);
+        }
+    }
+
+    public synchronized void removeBreakpoints(Collection<Integer> breakpoints) {
+        this.breakpoints.removeAll(breakpoints);
     }
 
     /**
