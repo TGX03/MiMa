@@ -41,6 +41,7 @@ public class MiMa implements Runnable {
             String[] splitData = line.split(" ");
             map.put(splitData[0], Integer.parseInt(splitData[1]));
         }
+        this.originalMap.putAll(this.map);
     }
 
     /**
