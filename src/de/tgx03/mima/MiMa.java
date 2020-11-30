@@ -181,6 +181,10 @@ public class MiMa implements Runnable {
         exit = true;
     }
 
+    public boolean exited() {
+        return this.exit;
+    }
+
     @Override
     public String toString() {
         Set<Map.Entry<String, Integer>> keyPairs;
