@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class MiMa implements Runnable {
 
-    private final Command[] commands;
+    private final ArrayList<Command> commands;
     private final HashMap<String, Integer> map = new HashMap<>();
     private final HashMap<String, Integer> originalMap = new HashMap<>();
     private boolean exit = false;
@@ -26,7 +26,9 @@ public class MiMa implements Runnable {
      * @param commands The commands of this MiMa
      */
     public MiMa(String[] commands) {
-        this.commands = initializeCommands(commands, this);
+        Command[] loadedCommands = initializeCommands(commands, this);
+        this.commands = new ArrayList<>(loadedCommands.length);
+        this.commands.addAll(Arrays.asList(loadedCommands));
     }
 
     /**
@@ -38,7 +40,9 @@ public class MiMa implements Runnable {
      * @param data     The initial data of this MiMa
      */
     public MiMa(String[] commands, String[] data) {
-        this.commands = initializeCommands(commands, this);
+        Command[] loadedCommands = initializeCommands(commands, this);
+        this.commands = new ArrayList<>(loadedCommands.length);
+        this.commands.addAll(Arrays.asList(loadedCommands));
         for (String line : data) {
             String[] splitData = line.split(" ");
             map.put(splitData[0], Integer.parseInt(splitData[1]));
@@ -108,16 +112,16 @@ public class MiMa implements Runnable {
      * Runs the next command in line and deals with its output
      */
     private void runNextCommand() {
-        if (currentCommand >= commands.length) {
+        if (currentCommand >= commands.size()) {
             exit = true;
             forcedExit = true;
             return;
         }
         int[] commandResult;
         synchronized (map) {
-            commandResult = commands[currentCommand].run(accu);
+            commandResult = commands.get(currentCommand).run(accu);
         }
-        if (commands[currentCommand].updatesAccu()) {
+        if (commands.get(currentCommand).updatesAccu()) {
             accu = commandResult[0];
         }
         if (commandResult[1] != Command.DONT_JUMP) {
@@ -204,6 +208,25 @@ public class MiMa implements Runnable {
      */
     public boolean exited() {
         return this.exit;
+    }
+
+    /**
+     * Add a new command to this MiMa
+     * @param position The position to add this command to
+     * @param newCommand The Command to add
+     */
+    public void addCommand(int position, Command newCommand) {
+        this.commands.add(position,newCommand);
+    }
+
+    /**
+     * Removes a command at a specified position from this MiMa
+     * @param position The position of the command to remove
+     */
+    public void removeCommand(int position) {
+        if (position < this.commands.size()) {
+            this.commands.remove(position);
+        }
     }
 
     @Override
