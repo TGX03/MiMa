@@ -229,6 +229,27 @@ public class MiMa implements Runnable {
         }
     }
 
+    public Command createCommand(String commandName, String commandValue) {
+        Command command;
+        switch (commandName) {
+            case "ADD" ->command = new ADD(commandValue, this.map);
+            case "AND" -> command = new AND(commandValue, this.map);
+            case "EQL" -> command = new EQL(commandValue, this.map);
+            case "HALT" -> command = new HALT(this);
+            case "JMN" -> command = new JMN(commandValue, this.map);
+            case "JMP" -> command = new JMP(commandValue, this.map);
+            case "LDC" -> command = new LDC(Integer.decode(commandValue));
+            case "LDV" -> command = new LDV(commandValue, this.map);
+            case "NOT" -> command = new NOT();
+            case "OR" -> command = new OR(commandValue, this.map);
+            case "RAR" -> command = new RAR();
+            case "STV" -> command = new STV(commandValue, this.map);
+            case "XOR" -> command = new XOR(commandValue, this.map);
+            default -> throw new IllegalArgumentException(commandName + " is not a valid MiMa instruction");
+        }
+        return command;
+    }
+
     @Override
     public String toString() {
         Set<Map.Entry<String, Integer>> keyPairs;
