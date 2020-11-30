@@ -245,6 +245,14 @@ public class MiMa implements Runnable {
         originalMap.remove(address);
     }
 
+    public Set<Map.Entry<String, Integer>> getMemory() {
+        return map.entrySet();
+    }
+
+    public Command[] getCommands() {
+        return commands.toArray(Command[]::new);
+    }
+
     public Command createCommand(String commandName, String commandValue) {
         Command command;
         switch (commandName) {
