@@ -7,7 +7,7 @@ import java.util.Map;
  */
 public class STV extends Command {
 
-    private final String memoryAdress;
+    private final String memoryAddress;
 
     /**
      * Creates a new STV command with its memory address
@@ -17,12 +17,12 @@ public class STV extends Command {
      */
     public STV(String address, Map<String, Integer> map) {
         super(map);
-        this.memoryAdress = address;
+        this.memoryAddress = address;
     }
 
     @Override
     public int[] run(int currentAccu) {
-        map.put(memoryAdress, currentAccu);
+        map.put(memoryAddress, currentAccu);
         return new int[]{-1, DONT_JUMP};
     }
 
