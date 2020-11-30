@@ -9,6 +9,9 @@ import java.util.*;
  */
 public class MiMa implements Runnable {
 
+    private static final int MAX_DATA_VALUE = 8388607;
+    private static final int MIN_DATA_VALUE = -8388608;
+
     private final ArrayList<Command> commands;
     private final HashMap<String, Integer> map = new HashMap<>();
     private final HashMap<String, Integer> originalMap = new HashMap<>();
@@ -230,6 +233,9 @@ public class MiMa implements Runnable {
     }
 
     public void addData(String address, int value) {
+        if (value > MAX_DATA_VALUE || value < MIN_DATA_VALUE) {
+            throw new IllegalArgumentException("This data value doesn't fit into 24 bits");
+        }
         map.put(address, value);
         originalMap.put(address, value);
     }
