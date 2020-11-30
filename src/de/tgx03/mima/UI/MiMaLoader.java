@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class MiMaLoader extends JDialog implements ActionListener {
+class MiMaLoader extends JDialog implements ActionListener {
 
     private static final Dimension SIZE = new Dimension(500, 130);
     private static final Dimension TEXT_FIELD_SIZE = new Dimension(300, 20);

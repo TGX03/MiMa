@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CommandCreator extends JDialog implements ActionListener {
+class CommandCreator extends JDialog implements ActionListener {
 
     private static final Dimension initialSize = new Dimension(200, 150);
 
