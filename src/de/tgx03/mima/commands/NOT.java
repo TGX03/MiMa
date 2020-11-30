@@ -5,6 +5,8 @@ package de.tgx03.mima.commands;
  */
 public class NOT extends Command {
 
+    private static final int OP_CODE = 0b111100010000000000000000;
+
     /**
      * Well I guess...
      * Luckily Checkstyle isn't required for this
@@ -16,5 +18,15 @@ public class NOT extends Command {
     @Override
     public int[] run(int currentAccu) {
         return new int[]{~currentAccu, DONT_JUMP};
+    }
+
+    @Override
+    public String toString() {
+        return "NOT";
+    }
+
+    @Override
+    public int hashCode() {
+        return OP_CODE;
     }
 }

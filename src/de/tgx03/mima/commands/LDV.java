@@ -7,6 +7,8 @@ import java.util.Map;
  */
 public class LDV extends Command {
 
+    private static final int OP_CODE = 0b000100000000000000000000;
+
     private final String memoryAddress;
 
     /**
@@ -21,5 +23,27 @@ public class LDV extends Command {
     @Override
     public int[] run(int currentAccu) {
         return new int[]{map.get(memoryAddress), DONT_JUMP};
+    }
+
+    @Override
+    public String toString() {
+        return "LDV : " + memoryAddress;
+    }
+
+    @Override
+    public int hashCode() {
+        int valueHash;
+        try {
+            valueHash = Integer.decode(memoryAddress);
+        } catch (NumberFormatException e) {
+            valueHash = memoryAddress.hashCode();
+        }
+        while (valueHash > DATA_MAX) {
+            valueHash = valueHash - DATA_MAX;
+        }
+        while (valueHash < 0) {
+            valueHash = valueHash + DATA_MAX;
+        }
+        return OP_CODE + valueHash;
     }
 }

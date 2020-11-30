@@ -7,6 +7,8 @@ import java.util.Map;
  */
 public class XOR extends Command {
 
+    private static final int OP_CODE = 0b011000000000000000000000;
+
     private final String memoryAddress;
 
     /**
@@ -24,5 +26,26 @@ public class XOR extends Command {
     public int[] run(int currentAccu) {
         int memoryValue = map.get(memoryAddress);
         return new int[]{memoryValue ^ currentAccu, DONT_JUMP};
+    }
+
+    public String toString() {
+        return "XOR : " + memoryAddress;
+    }
+
+    @Override
+    public int hashCode() {
+        int valueHash;
+        try {
+            valueHash = Integer.decode(memoryAddress);
+        } catch (NumberFormatException e) {
+            valueHash = memoryAddress.hashCode();
+        }
+        while (valueHash > DATA_MAX) {
+            valueHash = valueHash - DATA_MAX;
+        }
+        while (valueHash < 0) {
+            valueHash = valueHash + DATA_MAX;
+        }
+        return OP_CODE + valueHash;
     }
 }

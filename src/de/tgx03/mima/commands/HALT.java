@@ -7,6 +7,8 @@ import de.tgx03.mima.MiMa;
  */
 public class HALT extends Command {
 
+    private static final int OP_CODE = 0b111100000000000000000000;
+
     private final MiMa parentMiMa;
 
     /**
@@ -28,5 +30,15 @@ public class HALT extends Command {
     @Override
     public boolean updatesAccu() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "HALT";
+    }
+
+    @Override
+    public int hashCode() {
+        return OP_CODE;
     }
 }

@@ -5,8 +5,7 @@ package de.tgx03.mima.commands;
  */
 public class LDC extends Command {
 
-    private static final int DATA_MAX = 524287;
-    private static final int DATA_MIN = -524288;
+    private static final int OP_CODE = 0;
 
     private final int value;
 
@@ -26,5 +25,15 @@ public class LDC extends Command {
     @Override
     public int[] run(int currentAccu) {
         return new int[]{this.value, DONT_JUMP};
+    }
+
+    @Override
+    public String toString() {
+        return "LDC : " + value;
+    }
+
+    @Override
+    public int hashCode() {
+        return OP_CODE + value;
     }
 }

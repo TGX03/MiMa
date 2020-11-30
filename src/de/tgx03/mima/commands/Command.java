@@ -7,6 +7,9 @@ import java.util.Map;
  */
 public abstract class Command {
 
+    protected static final int DATA_MAX = 1048575;
+    protected static final int DATA_MIN = 0;
+
     /**
      * This value gets returned as the second return value of the run command
      * when the command doesn't change which command gets executed next
