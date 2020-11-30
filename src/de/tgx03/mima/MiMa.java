@@ -229,6 +229,16 @@ public class MiMa implements Runnable {
         }
     }
 
+    public void addData(String address, int value) {
+        map.put(address, value);
+        originalMap.put(address, value);
+    }
+
+    public void clearData(String address) {
+        map.remove(address);
+        originalMap.remove(address);
+    }
+
     public Command createCommand(String commandName, String commandValue) {
         Command command;
         switch (commandName) {
