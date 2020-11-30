@@ -175,7 +175,7 @@ public class MiMa implements Runnable {
     }
 
     /**
-     * Tell this MiMa to execute on the next possibility
+     * Tell this MiMa to exit on the next possibility
      */
     public void exit() {
         exit = true;
