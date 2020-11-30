@@ -75,6 +75,8 @@ class CommandCreator extends JDialog implements ActionListener {
     private void ok() {
         try {
             newCommand = instance.createCommand((String) commandList.getSelectedItem(), commandValue.getText());
+            commandPosition = Integer.parseInt(position.getText());
+            success = true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             success = false;
