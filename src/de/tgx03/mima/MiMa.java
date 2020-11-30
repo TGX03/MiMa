@@ -11,9 +11,11 @@ public class MiMa implements Runnable {
 
     private final Command[] commands;
     private final HashMap<String, Integer> map = new HashMap<>();
+    private final HashMap<String, Integer> originalMap = new HashMap<>();
     private boolean exit = false;
     private boolean forcedExit = false;
     private int accu;
+    int currentCommand = 0;
 
     /**
      * Creates a MiMa with its commands but no data
@@ -78,31 +80,74 @@ public class MiMa implements Runnable {
     }
 
     /**
-     * Executes this MiMa
+     * Executes this MiMa completely
      */
     public synchronized void run() {
+        while (!exit) {
+            runNextCommand();
+        }
+    }
+
+    /**
+     * Execute this MiMa until the provided command is reached and then stop
+     * @param until The number of the command to halt on
+     */
+    public synchronized void run(int until) {
+        while (!exit && currentCommand != until) {
+            runNextCommand();
+        }
+    }
+
+    /**
+     * Run only the next command
+     */
+    public synchronized void runSingleCommand() {
+        if (!exit) {
+            runNextCommand();
+        }
+    }
+
+    /**
+     * Runs the next command in line and deals with its output
+     */
+    private void runNextCommand() {
+        if (currentCommand >= commands.length) {
+            exit = true;
+            forcedExit = true;
+            return;
+        }
+        int[] commandResult;
+        synchronized (map) {
+            commandResult = commands[currentCommand].run(accu);
+        }
+        if (commands[currentCommand].updatesAccu()) {
+            accu = commandResult[0];
+        }
+        if (commandResult[1] != Command.DONT_JUMP) {
+            currentCommand = commandResult[1];
+        } else {
+            currentCommand++;
+        }
+    }
+
+    /**
+     * Resets this MiMa to its initial state
+     */
+    public synchronized void reset() {
         this.exit = false;
         this.forcedExit = false;
-        int currentCommand = 0;
-        while (!exit) {
-            if (currentCommand >= commands.length) {
-                exit = true;
-                forcedExit = true;
-                return;
-            }
-            int[] commandResult;
-            synchronized (map) {
-                commandResult = commands[currentCommand].run(accu);
-            }
-            if (commands[currentCommand].updatesAccu()) {
-                accu = commandResult[0];
-            }
-            if (commandResult[1] != Command.DONT_JUMP) {
-                currentCommand = commandResult[1];
-            } else {
-                currentCommand++;
-            }
-        }
+        this.currentCommand = 0;
+        this.map.clear();
+        this.map.putAll(this.originalMap);
+    }
+
+    /**
+     * Prepares this MiMa for a re-run, but keeps the Memory
+     */
+    public synchronized void resetInstructions() {
+        this.exit = false;
+        this.forcedExit = false;
+        this.currentCommand = 0;
     }
 
     /**
