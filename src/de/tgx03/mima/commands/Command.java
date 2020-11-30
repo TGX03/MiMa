@@ -3,7 +3,7 @@ package de.tgx03.mima.commands;
 import java.util.Map;
 
 /**
- * A class representig the basic structure of a MiMa command
+ * A class representing the basic structure of a MiMa command
  */
 public abstract class Command {
 
