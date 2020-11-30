@@ -111,8 +111,11 @@ class MiMaLoader extends JDialog implements ActionListener {
             } catch (IOException e) {
                 createdMiMa = new MiMa(instructions.toArray(new String[0]));
             }
-        } catch (IOException ignored) {
-
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            this.setVisible(false);
+            this.dispose();
         }
     }
 
