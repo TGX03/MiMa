@@ -13,7 +13,7 @@ class Tab extends JPanel implements PanelParent, ActionListener {
     private static final Dimension HORIZONTAL_SPACER = new Dimension(10, 0);
 
     private final MiMa instance;
-    private final Thread MiMaThread;
+    private final ExitNotifier runner;
     private final MiMaPanel[] panels = new MiMaPanel[2];
     private final JButton run = new JButton("Run MiMa");
     private final JButton step = new JButton("Run next command");
@@ -21,9 +21,12 @@ class Tab extends JPanel implements PanelParent, ActionListener {
     private final JButton resetCommands = new JButton("Go to first instruction");
     private final JButton resetMiMa = new JButton("Reset Memory and go to first instruction");
 
+    private Thread MiMaThread;
+
     public Tab(MiMa target) {
         this.instance = target;
-        this.MiMaThread = new Thread(new ExitNotifier(this.instance, this));
+        this.runner = new ExitNotifier(this.instance, this);
+        this.MiMaThread = new Thread(this.runner);
         run.addActionListener(this);
         step.addActionListener(this);
         stop.addActionListener(this);
@@ -89,6 +92,9 @@ class Tab extends JPanel implements PanelParent, ActionListener {
 
     private void runMiMa() {
         if (!MiMaThread.isAlive()) {
+            if (MiMaThread.getState() != Thread.State.NEW) {
+                MiMaThread = new Thread(this.runner);
+            }
             MiMaThread.start();
         }
     }
