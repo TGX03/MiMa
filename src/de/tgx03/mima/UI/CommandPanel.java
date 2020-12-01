@@ -37,6 +37,7 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel {
         this.add(buttons);
     }
 
+    @Override
     public void updateMiMa() {
         listModel.clear();
         for (Command command : instance.getCommands()) {
