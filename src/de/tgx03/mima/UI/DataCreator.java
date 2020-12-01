@@ -50,10 +50,9 @@ class DataCreator extends JDialog implements ActionListener {
         Integer value = Integer.decode(this.value.getText());
         try {
             instance.addData(this.address.getText(), value);
-            this.setVisible(false);
-            this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
             this.setVisible(false);
             this.dispose();
         }
