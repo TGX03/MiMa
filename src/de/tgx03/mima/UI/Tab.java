@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 
 class Tab extends JPanel implements PanelParent, ActionListener {
 
+    private static final Dimension VERTICAL_SPACER = new Dimension(0, 10);
+    private static final Dimension HORIZONTAL_SPACER = new Dimension(10, 0);
+
     private final MiMa instance;
     private final Thread MiMaThread;
     private final MiMaPanel[] panels = new MiMaPanel[2];
@@ -18,27 +21,29 @@ class Tab extends JPanel implements PanelParent, ActionListener {
     public Tab(MiMa target) {
         this.instance = target;
         this.MiMaThread = new Thread(new ExitNotifier(this.instance, this));
-        CommandPanel commandPanel = new CommandPanel(target, this);
-        panels[0] = commandPanel;
-
-        MemoryPanel memoryPanel = new MemoryPanel(target, this);
-        panels[1] = memoryPanel;
+        run.addActionListener(this);
+        stop.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        this.add(Box.createRigidArea(VERTICAL_SPACER));
         JPanel buttons = new JPanel();
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
-        run.addActionListener(this);
         buttons.add(run);
-        buttons.add(Box.createRigidArea(new Dimension(10, 0)));
-        stop.addActionListener(this);
+        buttons.add(Box.createRigidArea(HORIZONTAL_SPACER));
         buttons.add(stop);
         this.add(buttons);
+        this.add(Box.createRigidArea(VERTICAL_SPACER));
 
-        this.add(Box.createRigidArea(new Dimension(0, 10)));
+        CommandPanel commandPanel = new CommandPanel(this.instance, this);
+        MemoryPanel memoryPanel = new MemoryPanel(this.instance, this);
+        panels[0] = commandPanel;
+        panels[1] = memoryPanel;
 
+        JPanel panels = new JPanel();
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, commandPanel, memoryPanel);
-        this.add(split);
+        panels.add(split);
+        this.add(panels);
     }
 
     @Override
