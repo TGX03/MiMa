@@ -17,8 +17,6 @@ import java.util.Set;
 
 public class MainWindow extends JFrame implements ActionListener {
 
-    private static final Dimension initialSize = new Dimension(500, 500);
-
     private final JMenuBar topMenu = new JMenuBar();
     private final JMenu fileMenu = new JMenu("File");
     private final JMenuItem emptyMiMa = new JMenuItem("Create new empty MiMa");
