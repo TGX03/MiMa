@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.DigestException;
 
 class Tab extends JPanel implements PanelParent, ActionListener {
 
