@@ -4,6 +4,7 @@ import de.tgx03.mima.MiMa;
 import de.tgx03.mima.commands.Command;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,6 +20,7 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel {
     public CommandPanel(MiMa mima, PanelParent parent) {
         this.parent = parent;
         this.instance = mima;
+        commandList.setCellRenderer(new ListColorRenderer(this.instance));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         if (mima != null) {
@@ -68,5 +70,23 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel {
         int selectedCommand = commandList.getSelectedIndex();
         instance.removeCommand(selectedCommand);
         parent.update();
+    }
+
+    private static class ListColorRenderer extends DefaultListCellRenderer {
+
+        private final MiMa instance;
+
+        public ListColorRenderer(MiMa mima) {
+            this.instance = mima;
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            Component result = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            if (index == this.instance.currentCommand()) {
+                result.setBackground(Color.RED);
+            }
+            return result;
+        }
     }
 }
