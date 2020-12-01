@@ -24,7 +24,9 @@ class DataCreator extends JDialog implements ActionListener {
         this.add(value);
         JPanel buttons = new JPanel();
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
+        ok.addActionListener(this);
         buttons.add(ok);
+        cancel.addActionListener(this);
         buttons.add(cancel);
         this.add(buttons);
         this.setSize(initialSize);
@@ -46,8 +48,12 @@ class DataCreator extends JDialog implements ActionListener {
         Integer value = Integer.decode(this.value.getText());
         try {
             instance.addData(this.address.getText(), value);
+            this.setVisible(false);
+            this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            this.setVisible(false);
+            this.dispose();
         }
     }
 
