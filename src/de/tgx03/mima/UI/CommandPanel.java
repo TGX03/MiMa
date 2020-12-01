@@ -28,7 +28,7 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel {
                 listModel.addElement(command.toString());
             }
         }
-        this.add(commandList);
+        this.add(new JScrollPane(commandList));
 
         JPanel buttons = new JPanel();
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));

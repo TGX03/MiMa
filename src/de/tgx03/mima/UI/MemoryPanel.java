@@ -3,6 +3,7 @@ package de.tgx03.mima.UI;
 import de.tgx03.mima.MiMa;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
             listModel.addAll(Arrays.asList(splitMemory));
         }
 
-        this.add(dataList);
+        this.add(new JScrollPane(dataList));
 
         JPanel buttons = new JPanel();
         add.addActionListener(this);
