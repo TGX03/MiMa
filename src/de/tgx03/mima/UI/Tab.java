@@ -16,12 +16,14 @@ class Tab extends JPanel implements PanelParent, ActionListener {
     private final Thread MiMaThread;
     private final MiMaPanel[] panels = new MiMaPanel[2];
     private final JButton run = new JButton("Run MiMa");
+    private final JButton step = new JButton("Run next command");
     private final JButton stop = new JButton("STOP");
 
     public Tab(MiMa target) {
         this.instance = target;
         this.MiMaThread = new Thread(new ExitNotifier(this.instance, this));
         run.addActionListener(this);
+        step.addActionListener(this);
         stop.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -30,6 +32,8 @@ class Tab extends JPanel implements PanelParent, ActionListener {
         JPanel buttons = new JPanel();
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
         buttons.add(run);
+        buttons.add(Box.createRigidArea(HORIZONTAL_SPACER));
+        buttons.add(step);
         buttons.add(Box.createRigidArea(HORIZONTAL_SPACER));
         buttons.add(stop);
         this.add(buttons);
@@ -59,6 +63,9 @@ class Tab extends JPanel implements PanelParent, ActionListener {
             runMiMa();
         } else if (e.getSource() == stop) {
             stopMiMa();
+        } else if (e.getSource() == step) {
+            instance.runSingleCommand();
+            update();
         }
     }
 
