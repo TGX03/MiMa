@@ -18,6 +18,8 @@ class Tab extends JPanel implements PanelParent, ActionListener {
     private final JButton run = new JButton("Run MiMa");
     private final JButton step = new JButton("Run next command");
     private final JButton stop = new JButton("STOP");
+    private final JButton resetCommands = new JButton("Go to first instruction");
+    private final JButton resetMiMa = new JButton("Reset Memory and go to first instruction");
 
     public Tab(MiMa target) {
         this.instance = target;
@@ -25,6 +27,8 @@ class Tab extends JPanel implements PanelParent, ActionListener {
         run.addActionListener(this);
         step.addActionListener(this);
         stop.addActionListener(this);
+        resetCommands.addActionListener(this);
+        resetMiMa.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -37,6 +41,14 @@ class Tab extends JPanel implements PanelParent, ActionListener {
         buttons.add(Box.createRigidArea(HORIZONTAL_SPACER));
         buttons.add(stop);
         this.add(buttons);
+        this.add(Box.createRigidArea(VERTICAL_SPACER));
+
+        JPanel resetButtons = new JPanel();
+        resetButtons.setLayout(new BoxLayout(resetButtons, BoxLayout.X_AXIS));
+        resetButtons.add(resetCommands);
+        resetButtons.add(Box.createRigidArea(HORIZONTAL_SPACER));
+        resetButtons.add(resetMiMa);
+        this.add(resetButtons);
         this.add(Box.createRigidArea(VERTICAL_SPACER));
 
         CommandPanel commandPanel = new CommandPanel(this.instance, this);
@@ -65,6 +77,12 @@ class Tab extends JPanel implements PanelParent, ActionListener {
             stopMiMa();
         } else if (e.getSource() == step) {
             instance.runSingleCommand();
+            update();
+        } else if (e.getSource() == resetCommands) {
+            instance.resetInstructions();
+            update();
+        } else if (e.getSource() == resetMiMa) {
+            instance.reset();
             update();
         }
     }
