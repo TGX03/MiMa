@@ -14,8 +14,7 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel {
     private final DefaultListModel<String> listModel = new DefaultListModel<>();
     private final JList<String> commandList = new JList<>(listModel);
     private final PanelParent parent;
-
-    private MiMa instance;
+    private final MiMa instance;
 
     public CommandPanel(MiMa mima, PanelParent parent) {
         this.parent = parent;
@@ -36,11 +35,6 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel {
         buttons.add(addCommand);
         buttons.add(removeCommand);
         this.add(buttons);
-    }
-
-    public void updateMiMa(MiMa instance) {
-        this.instance = instance;
-        updateMiMa();
     }
 
     public void updateMiMa() {
