@@ -17,7 +17,13 @@ public class RAR extends Command {
     @Override
     public int[] run(int currentAccu) {
         int shifted = currentAccu >>> 1;
-        if (currentAccu % 2 == 1) {
+        if (currentAccu < 0) {
+            int secondZero = 0b10111111111111111111111111111111;
+            shifted = shifted & secondZero;
+            int twentyThirdOne = 0b10000000000000000000000;
+            shifted = shifted | twentyThirdOne;
+        }
+        if (currentAccu % 2 != 0) {
             int firstOne = 0b10000000000000000000000000000000;
             shifted = shifted | firstOne;
         }
@@ -29,6 +35,7 @@ public class RAR extends Command {
         return "RAR";
     }
 
+    @Override
     public int hashCode() {
         return OP_CODE;
     }
