@@ -21,6 +21,7 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel {
         this.parent = parent;
         this.instance = mima;
         commandList.setCellRenderer(new ListColorRenderer(this.instance));
+        commandList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         if (mima != null) {

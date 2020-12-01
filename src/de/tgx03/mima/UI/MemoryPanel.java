@@ -32,6 +32,7 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
             listModel.addAll(Arrays.asList(splitMemory));
         }
 
+        dataList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.add(new JScrollPane(dataList));
 
         JPanel buttons = new JPanel();
