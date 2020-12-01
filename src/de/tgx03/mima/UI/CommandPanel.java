@@ -20,6 +20,8 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel, L
     private final JButton addCommand = new JButton("Add command");
     private final JButton removeCommand = new JButton("Remove selected Command");
     private final JButton breakpoint = new JButton("Remove breakpoint");    // Remove at the beginning because otherwise the remove option doesn't fit
+    private final JLabel commandRepresentation = new JLabel();
+    private final JComboBox<String> representations = new JComboBox<>(new String[]{"Binary", "Octal", "Decimal", "Hexadecimal"});
     private final DefaultListModel<String> listModel = new DefaultListModel<>();
     private final JList<String> commandList = new JList<>(listModel);
     private final PanelParent parent;
@@ -27,7 +29,8 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel, L
 
     /**
      * Creates a new panel which is responsible for the commands of a given MiMa
-     * @param mima The MiMa this panel is responsible for
+     *
+     * @param mima   The MiMa this panel is responsible for
      * @param parent The parent of this panel
      */
     public CommandPanel(@NotNull MiMa mima, @NotNull PanelParent parent) {
@@ -60,6 +63,13 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel, L
         buttons.add(removeCommand);
         buttons.add(breakpoint);
         this.add(buttons);
+
+        JPanel commandRepresentation = new JPanel();
+        commandRepresentation.setLayout(new FlowLayout());
+        commandRepresentation.add(this.representations);
+        this.representations.addActionListener(this);
+        commandRepresentation.add(this.commandRepresentation);
+        this.add(commandRepresentation);
     }
 
     @Override
@@ -78,7 +88,21 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel, L
             removeCommand();
         } else if (e.getSource() == breakpoint) {
             manageBreakpoint();
+        } else if (e.getSource() == representations) {
+            updateCommandRepresentation();
         }
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        int selected = commandList.getSelectedIndex();
+        breakpoint.setPreferredSize(breakpoint.getSize());
+        if (this.instance.isBreakpoint(selected)) {
+            breakpoint.setText("Remove breakpoint");
+        } else {
+            breakpoint.setText("Add breakpoint");
+        }
+        updateCommandRepresentation();
     }
 
     /**
@@ -114,14 +138,19 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel, L
         parent.update();
     }
 
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        int selected = commandList.getSelectedIndex();
-        breakpoint.setPreferredSize(breakpoint.getSize());
-        if (this.instance.isBreakpoint(selected)) {
-            breakpoint.setText("Remove breakpoint");
+    private void updateCommandRepresentation() {
+        int index = commandList.getSelectedIndex();
+        if (index < 0) {
+            commandRepresentation.setText("");
         } else {
-            breakpoint.setText("Add breakpoint");
+            int value = this.instance.getCommands()[index].hashCode();
+            switch (representations.getSelectedIndex()) {
+                case 0 -> commandRepresentation.setText(Integer.toBinaryString(value));
+                case 1 -> commandRepresentation.setText(Integer.toOctalString(value));
+                case 2 -> commandRepresentation.setText(Integer.toString(value));
+                case 3 -> commandRepresentation.setText(Integer.toHexString(value));
+                default -> throw new IllegalArgumentException();
+            }
         }
     }
 
@@ -134,6 +163,7 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel, L
 
         /**
          * Creates a new renderer for a specific MiMa
+         *
          * @param mima The instance this renderer may refer to
          */
         public ListColorRenderer(@NotNull MiMa mima) {
