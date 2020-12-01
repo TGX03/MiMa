@@ -168,18 +168,6 @@ public class MiMa implements Runnable {
     }
 
     /**
-     * Adds multiple new breakpoints to this MiMa
-     * @param breakpoints The breakpoints to add
-     */
-    public synchronized void addBreakpoints(Collection<Integer> breakpoints) {
-        if (this.breakpoints == null) {
-            this.breakpoints = breakpoints;
-        } else {
-            this.breakpoints.addAll(breakpoints);
-        }
-    }
-
-    /**
      * Remove a breakpoint from this MiMa
      * @param breakpoint The number of the breakpoint to remove
      */
@@ -187,14 +175,6 @@ public class MiMa implements Runnable {
         if (this.breakpoints != null) {
             this.breakpoints.remove(breakpoint);
         }
-    }
-
-    /**
-     * Removes multiple breakpoints from this MiMa
-     * @param breakpoints Th breakpoints to remove
-     */
-    public synchronized void removeBreakpoints(Collection<Integer> breakpoints) {
-        this.breakpoints.removeAll(breakpoints);
     }
 
     /**
