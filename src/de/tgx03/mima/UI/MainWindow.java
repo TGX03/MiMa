@@ -45,7 +45,11 @@ public class MainWindow extends JFrame implements ActionListener {
 
         this.add(tabber);
 
-        this.setSize(initialSize);
+        createEmptyMiMa();
+        this.pack();
+        tabber.remove(0);
+
+        this.setResizable(false);
         this.setVisible(true);
     }
 
@@ -71,14 +75,14 @@ public class MainWindow extends JFrame implements ActionListener {
 
     private void createEmptyMiMa() {
         Tab newTab = new Tab(new MiMa(new String[0]));
-        tabber.add(newTab);
+        tabber.add(String.valueOf(tabber.getTabCount()), newTab);
     }
 
     private void loadMiMa() {
         MiMaLoader loader = new MiMaLoader();
         if (loader.success()) {
             Tab newTab = new Tab(loader.getCreatedMiMa());
-            tabber.add(newTab);
+            tabber.add(String.valueOf(tabber.getTabCount()), newTab);
         }
     }
 
