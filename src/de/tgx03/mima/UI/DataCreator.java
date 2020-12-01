@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 
 class DataCreator extends JDialog implements ActionListener {
 
-    private static final Dimension initialSize = new Dimension(200, 150);
-
     private final JTextField address = new JTextField("Address");
     private final JTextField value = new JTextField("Value");
     private final JButton ok = new JButton("OK");
@@ -19,17 +17,21 @@ class DataCreator extends JDialog implements ActionListener {
 
     public DataCreator(MiMa target) {
         this.instance = target;
-        this.setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+        this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.add(address);
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(value);
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
         JPanel buttons = new JPanel();
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
         ok.addActionListener(this);
         buttons.add(ok);
         cancel.addActionListener(this);
+        buttons.add(Box.createRigidArea(new Dimension(10, 0)));
         buttons.add(cancel);
         this.add(buttons);
-        this.setSize(initialSize);
+        this.pack();
+        this.setResizable(false);
         this.setModalityType(ModalityType.APPLICATION_MODAL);
         this.setModal(true);
         this.setVisible(true);
