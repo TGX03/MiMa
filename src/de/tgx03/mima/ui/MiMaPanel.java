@@ -1,4 +1,4 @@
-package de.tgx03.mima.UI;
+package de.tgx03.mima.ui;
 
 /**
  * What a panel controlling a MiMa needs to respond to

@@ -1,4 +1,4 @@
-package de.tgx03.mima.UI;
+package de.tgx03.mima.ui;
 
 import de.tgx03.mima.MiMa;
 

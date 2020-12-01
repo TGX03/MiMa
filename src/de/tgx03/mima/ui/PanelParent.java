@@ -1,4 +1,4 @@
-package de.tgx03.mima.UI;
+package de.tgx03.mima.ui;
 
 /**
  * What the parent of a panel needs to be able to do
