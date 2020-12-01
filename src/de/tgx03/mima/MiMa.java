@@ -97,7 +97,7 @@ public class MiMa implements Runnable {
             broke = false;
             runNextCommand();
         }
-        if (this.breakpoints.contains(currentCommand)) {
+        if (this.breakpoints != null && this.breakpoints.contains(currentCommand)) {
             broke = true;
         }
     }
