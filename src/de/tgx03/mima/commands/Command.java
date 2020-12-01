@@ -46,11 +46,24 @@ public abstract class Command {
         return true;
     }
 
+    /**
+     * Writes a specified value to the specified address in memory
+     *
+     * @param memoryAddress The address to write to
+     * @param value         The value to store
+     */
     protected void write(String memoryAddress, int value) {
         map.remove(memoryAddress);
         map.put(memoryAddress, value);
     }
 
+    /**
+     * Reads from a specified memory address
+     * When reading from an unknown memory address, it returns 0, since an unset address holds 0 as value
+     *
+     * @param memoryAddress The memory address to read from
+     * @return The stored value
+     */
     protected int read(String memoryAddress) {
         Integer result = map.get(memoryAddress);
         return Objects.requireNonNullElse(result, 0);
