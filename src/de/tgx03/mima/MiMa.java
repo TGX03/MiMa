@@ -160,7 +160,7 @@ public class MiMa implements Runnable {
      */
     public synchronized void addBreakpoint(int breakpoint) {
         if (this.breakpoints == null) {
-            this.breakpoints = new ArrayList<>();
+            this.breakpoints = new HashSet<>();
         }
         if (!this.breakpoints.contains(breakpoint)) {
             this.breakpoints.add(breakpoint);
