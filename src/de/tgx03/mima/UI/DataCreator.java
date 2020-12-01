@@ -24,11 +24,15 @@ class DataCreator extends JDialog implements ActionListener {
      */
     public DataCreator(MiMa target) {
         this.instance = target;
+
+        // Create text fields
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.add(address);
         this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(value);
         this.add(Box.createRigidArea(new Dimension(0, 5)));
+
+        // Create buttons
         JPanel buttons = new JPanel();
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
         ok.addActionListener(this);
@@ -36,6 +40,8 @@ class DataCreator extends JDialog implements ActionListener {
         cancel.addActionListener(this);
         buttons.add(Box.createRigidArea(new Dimension(10, 0)));
         buttons.add(cancel);
+
+        // Set window properties
         this.add(buttons);
         this.pack();
         this.setResizable(false);

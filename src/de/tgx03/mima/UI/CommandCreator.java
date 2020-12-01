@@ -30,6 +30,8 @@ class CommandCreator extends JDialog implements ActionListener {
      */
     public CommandCreator(@NotNull MiMa target) {
         this.instance = target;
+
+        // Create text fields
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.add(commandList);
         this.add(Box.createRigidArea(spacer));
@@ -37,6 +39,8 @@ class CommandCreator extends JDialog implements ActionListener {
         this.add(Box.createRigidArea(spacer));
         this.add(position);
         this.add(Box.createRigidArea(spacer));
+
+        // Create buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         ok.addActionListener(this);
@@ -45,6 +49,8 @@ class CommandCreator extends JDialog implements ActionListener {
         buttonPanel.add(Box.createRigidArea(spacer));
         buttonPanel.add(cancel);
         this.add(buttonPanel);
+
+        // Set window properties
         this.pack();
         this.setModalityType(ModalityType.APPLICATION_MODAL);
         this.setModal(true);
