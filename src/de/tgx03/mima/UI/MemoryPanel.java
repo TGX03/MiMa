@@ -24,6 +24,7 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        listModel.add(0, accu());
         if (mima != null) {
             String memory = instance.toString();
             String[] splitMemory = memory.split(SEPARATOR);
@@ -43,6 +44,7 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
     @Override
     public void updateMiMa() {
         listModel.clear();
+        listModel.add(0, this.accu());
         String memory = instance.toString();
         String[] splitMemory = memory.split(SEPARATOR);
         listModel.addAll(Arrays.asList(splitMemory));
@@ -63,5 +65,9 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
         String[] split = selected.split(": ");
         instance.clearData(split[0]);
         parent.update();
+    }
+
+    private String accu() {
+        return "accu: " + this.instance.getAccu();
     }
 }

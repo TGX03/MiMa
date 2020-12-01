@@ -299,4 +299,12 @@ public class MiMa implements Runnable {
         }
         return result.toString();
     }
+
+    public int currentCommand() {
+        return currentCommand;
+    }
+
+    public int getAccu() {
+        return accu;
+    }
 }
