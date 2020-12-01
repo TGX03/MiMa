@@ -106,7 +106,7 @@ class MiMaLoader extends JDialog implements ActionListener {
             selectCommandFile();
         } else if (e.getSource() == chooseData) {
             selectDataFile();
-        } else if (e.getSource() == ok ) {
+        } else if (e.getSource() == ok) {
             generateMiMa();
         } else if (e.getSource() == cancel) {
             cancel();

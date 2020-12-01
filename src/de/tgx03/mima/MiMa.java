@@ -16,10 +16,10 @@ public class MiMa implements Runnable {
     private final ArrayList<Command> commands;
     private final HashMap<String, Integer> map = new HashMap<>();
     private final HashMap<String, Integer> originalMap = new HashMap<>();
+    int currentCommand = 0;
     private volatile boolean exit = false;
     private boolean forcedExit = false;
     private int accu;
-    int currentCommand = 0;
     private Collection<Integer> breakpoints;
     private boolean broke = false;
 
@@ -163,6 +163,7 @@ public class MiMa implements Runnable {
 
     /**
      * Adds a new breakpoint to this MiMa
+     *
      * @param breakpoint The number of the command to stop on
      */
     public synchronized void addBreakpoint(int breakpoint) {
@@ -184,6 +185,7 @@ public class MiMa implements Runnable {
 
     /**
      * Remove a breakpoint from this MiMa
+     *
      * @param breakpoint The number of the breakpoint to remove
      */
     public synchronized void removeBreakpoint(int breakpoint) {
@@ -202,6 +204,7 @@ public class MiMa implements Runnable {
     /**
      * Whether this MiMa has completely terminated. If the MiMa has only halted because of breakpoints,
      * this returns false
+     *
      * @return Whether the MiMa has terminated
      */
     public boolean exited() {
@@ -210,15 +213,17 @@ public class MiMa implements Runnable {
 
     /**
      * Add a new command to this MiMa
-     * @param position The position to add this command to
+     *
+     * @param position   The position to add this command to
      * @param newCommand The Command to add
      */
     public void addCommand(int position, Command newCommand) {
-        this.commands.add(position,newCommand);
+        this.commands.add(position, newCommand);
     }
 
     /**
      * Removes a command at a specified position from this MiMa
+     *
      * @param position The position of the command to remove
      */
     public void removeCommand(int position) {
@@ -251,7 +256,7 @@ public class MiMa implements Runnable {
     public Command createCommand(String commandName, @NotNull String commandValue) {
         Command command;
         switch (commandName) {
-            case "ADD" ->command = new ADD(commandValue, this.map);
+            case "ADD" -> command = new ADD(commandValue, this.map);
             case "AND" -> command = new AND(commandValue, this.map);
             case "EQL" -> command = new EQL(commandValue, this.map);
             case "HALT" -> command = new HALT(this);

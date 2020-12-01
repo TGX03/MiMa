@@ -30,6 +30,7 @@ class Tab extends JPanel implements PanelParent, ActionListener {
 
     /**
      * Create a new tab holding the controls for a MiMa
+     *
      * @param target The MiMa this tab is assigned to
      */
     public Tab(@NotNull MiMa target) {
@@ -132,6 +133,7 @@ class Tab extends JPanel implements PanelParent, ActionListener {
     /**
      * Returns the MiMa this tab is managing.
      * Gets used by the main windows for save operations
+     *
      * @return The MiMa of this tab
      */
     protected MiMa getInstance() {
@@ -149,7 +151,7 @@ class Tab extends JPanel implements PanelParent, ActionListener {
 
         /**
          * @param instance The Runnable this shall run and then notify the parent
-         * @param parent The parent to notify
+         * @param parent   The parent to notify
          */
         public ExitNotifier(@NotNull Runnable instance, @NotNull PanelParent parent) {
             this.instance = instance;

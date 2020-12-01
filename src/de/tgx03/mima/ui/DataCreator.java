@@ -20,6 +20,7 @@ class DataCreator extends JDialog implements ActionListener {
 
     /**
      * Creates a new Dialog to add Data to a provided MiMa
+     *
      * @param target The MiMa to create a command for
      */
     public DataCreator(MiMa target) {

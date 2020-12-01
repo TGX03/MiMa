@@ -24,7 +24,8 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
 
     /**
      * Creates a new Memory panel responsible for a MiMa's memory
-     * @param mima The MiMa instance this panel is responsible for
+     *
+     * @param mima   The MiMa instance this panel is responsible for
      * @param parent The parent of this panel
      */
     public MemoryPanel(@NotNull MiMa mima, @NotNull PanelParent parent) {

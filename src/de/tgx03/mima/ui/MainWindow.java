@@ -62,6 +62,7 @@ public class MainWindow extends JFrame implements ActionListener {
 
     /**
      * Launches the program and shows the window
+     *
      * @param args ignored
      */
     public static void main(String[] args) {
@@ -75,7 +76,7 @@ public class MainWindow extends JFrame implements ActionListener {
             createEmptyMiMa();
         } else if (e.getSource() == loadMiMa) {
             loadMiMa();
-        }else if (e.getSource() == saveCommands) {
+        } else if (e.getSource() == saveCommands) {
             saveCommands();
         } else if (e.getSource() == saveMemory) {
             saveMemory();

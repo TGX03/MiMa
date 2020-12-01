@@ -26,6 +26,7 @@ class CommandCreator extends JDialog implements ActionListener {
     /**
      * Launches a new Dialog that asks for the data of the new command
      * and adds it to the MiMa if the User so chooses
+     *
      * @param target The MiMa to add the new Command to
      */
     public CommandCreator(@NotNull MiMa target) {
