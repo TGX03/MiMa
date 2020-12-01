@@ -278,6 +278,9 @@ public class MiMa implements Runnable {
     public String toString() {
         Set<Map.Entry<String, Integer>> keyPairs;
         synchronized (map) {
+            if (map.size() == 0) {
+                return forcedExit ? "MiMa WAS FORCEFULLY TERMINATED BECAUSE OF AN ERROR" : "";
+            }
             keyPairs = map.entrySet();
         }
         ArrayList<String> elements = new ArrayList<>(keyPairs.size());
