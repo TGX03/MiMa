@@ -21,6 +21,9 @@ class Tab extends JPanel implements PanelParent, ActionListener {
         CommandPanel commandPanel = new CommandPanel(target, this);
         panels[0] = commandPanel;
 
+        MemoryPanel memoryPanel = new MemoryPanel(target, this);
+        panels[1] = memoryPanel;
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JPanel buttons = new JPanel();
@@ -34,7 +37,7 @@ class Tab extends JPanel implements PanelParent, ActionListener {
 
         this.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, commandPanel, new JPanel());
+        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, commandPanel, memoryPanel);
         this.add(split);
     }
 
