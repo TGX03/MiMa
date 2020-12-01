@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A Dialog to create new Memory entries for the MiMa
+ */
 class DataCreator extends JDialog implements ActionListener {
 
     private final JTextField address = new JTextField("Address");
@@ -15,6 +18,10 @@ class DataCreator extends JDialog implements ActionListener {
     private final JButton cancel = new JButton("cancel");
     private final MiMa instance;
 
+    /**
+     * Creates a new Dialog to add Data to a provided MiMa
+     * @param target The MiMa to create a command for
+     */
     public DataCreator(MiMa target) {
         this.instance = target;
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -46,6 +53,9 @@ class DataCreator extends JDialog implements ActionListener {
         }
     }
 
+    /**
+     * When pressing the ok button
+     */
     private void ok() {
         try {
             Integer value = Integer.decode(this.value.getText());
@@ -58,6 +68,9 @@ class DataCreator extends JDialog implements ActionListener {
         }
     }
 
+    /**
+     * When pressing the cancel button
+     */
     private void cancel() {
         this.setVisible(false);
         this.dispose();

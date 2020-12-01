@@ -1,6 +1,7 @@
 package de.tgx03.mima;
 
 import de.tgx03.mima.commands.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -28,7 +29,7 @@ public class MiMa implements Runnable {
      *
      * @param commands The commands of this MiMa
      */
-    public MiMa(String[] commands) {
+    public MiMa(@NotNull String[] commands) {
         Command[] loadedCommands = initializeCommands(commands, this);
         this.commands = new ArrayList<>(loadedCommands.length);
         this.commands.addAll(Arrays.asList(loadedCommands));
@@ -42,7 +43,7 @@ public class MiMa implements Runnable {
      * @param commands The commands of this MiMa
      * @param data     The initial data of this MiMa
      */
-    public MiMa(String[] commands, String[] data) {
+    public MiMa(@NotNull String[] commands, @NotNull String[] data) {
         Command[] loadedCommands = initializeCommands(commands, this);
         this.commands = new ArrayList<>(loadedCommands.length);
         this.commands.addAll(Arrays.asList(loadedCommands));
@@ -60,7 +61,7 @@ public class MiMa implements Runnable {
      * @param instance The instance the commands belong to
      * @return An array of all the resulting commands
      */
-    private static Command[] initializeCommands(String[] commands, MiMa instance) {
+    private static Command[] initializeCommands(@NotNull String[] commands, @NotNull MiMa instance) {
         Command[] interpretedCommands = new Command[commands.length];
         final HALT staticHalt = new HALT(instance);
         final NOT staticNot = new NOT();
@@ -247,7 +248,7 @@ public class MiMa implements Runnable {
         return commands.toArray(Command[]::new);
     }
 
-    public Command createCommand(String commandName, String commandValue) {
+    public Command createCommand(String commandName, @NotNull String commandValue) {
         Command command;
         switch (commandName) {
             case "ADD" ->command = new ADD(commandValue, this.map);

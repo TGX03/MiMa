@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * The dialog for loading a new MiMa from its command file
+ * and optionally data file
+ */
 class MiMaLoader extends JDialog implements ActionListener {
 
     private static final Dimension SIZE = new Dimension(500, 130);
@@ -20,7 +24,7 @@ class MiMaLoader extends JDialog implements ActionListener {
     private final JTextField commandPath = new JTextField("Instruction File");
     private final JTextField dataPath = new JTextField("Data File");
     private final JButton chooseCommands = new JButton("Choose instruction file");
-    private final JButton chooseData = new JButton("Choose Data file");
+    private final JButton chooseData = new JButton("Choose Data file (optional)");
     private final JButton ok = new JButton("OK");
     private final JButton cancel = new JButton("cancel");
     private final JFileChooser chooser = new JFileChooser();
@@ -31,9 +35,11 @@ class MiMaLoader extends JDialog implements ActionListener {
         this.setTitle("Create a new MiMa");
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
+        // This gets divided in three parallel columns
         JPanel settings = new JPanel();
         settings.setLayout(new BoxLayout(settings, BoxLayout.X_AXIS));
 
+        // Create the labels for the text fields
         JPanel labels = new JPanel();
         labels.setLayout(new BoxLayout(labels, BoxLayout.Y_AXIS));
         labels.add(new JLabel("Instructions:"));
@@ -41,6 +47,7 @@ class MiMaLoader extends JDialog implements ActionListener {
         labels.add(new JLabel("Data:"));
         settings.add(labels);
 
+        // Create text fields
         settings.add(Box.createRigidArea(HORIZONTAL_SPACE));
         JPanel textFields = new JPanel();
         textFields.setLayout(new BoxLayout(textFields, BoxLayout.Y_AXIS));
@@ -53,6 +60,7 @@ class MiMaLoader extends JDialog implements ActionListener {
         textFields.add(dataPath);
         settings.add(textFields);
 
+        // Create buttons to launch file chooser
         settings.add(Box.createRigidArea(HORIZONTAL_SPACE));
         JPanel choosers = new JPanel();
         choosers.setLayout(new BoxLayout(choosers, BoxLayout.Y_AXIS));
@@ -63,17 +71,20 @@ class MiMaLoader extends JDialog implements ActionListener {
 
         this.add(settings);
 
+        // Create the ok and cancel button
         JPanel buttons = new JPanel();
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
         buttons.add(cancel);
         buttons.add(ok);
         this.add(buttons);
 
+        // Register this with the buttons
         chooseCommands.addActionListener(this);
         chooseData.addActionListener(this);
         cancel.addActionListener(this);
         ok.addActionListener(this);
 
+        // Set the size of this and put it in the foreground
         this.setSize(SIZE);
         this.setResizable(false);
         this.setModalityType(ModalityType.APPLICATION_MODAL);

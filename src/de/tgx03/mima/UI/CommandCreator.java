@@ -2,12 +2,16 @@ package de.tgx03.mima.UI;
 
 import de.tgx03.mima.MiMa;
 import de.tgx03.mima.commands.Command;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A small Dialog in which the user may create a new Command for a MiMa
+ */
 class CommandCreator extends JDialog implements ActionListener {
 
     private static final Dimension spacer = new Dimension(10, 5);
@@ -19,7 +23,12 @@ class CommandCreator extends JDialog implements ActionListener {
     private final JButton cancel = new JButton("Cancel");
     private final MiMa instance;
 
-    public CommandCreator(MiMa target) {
+    /**
+     * Launches a new Dialog that asks for the data of the new command
+     * and adds it to the MiMa if the User so chooses
+     * @param target The MiMa to add the new Command to
+     */
+    public CommandCreator(@NotNull MiMa target) {
         this.instance = target;
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.add(commandList);
@@ -52,6 +61,9 @@ class CommandCreator extends JDialog implements ActionListener {
         }
     }
 
+    /**
+     * When the user presses the ok button
+     */
     private void ok() {
         try {
             Command newCommand = instance.createCommand((String) commandList.getSelectedItem(), commandValue.getText());
@@ -65,6 +77,9 @@ class CommandCreator extends JDialog implements ActionListener {
         }
     }
 
+    /**
+     * When the user presses the cancel button
+     */
     private void cancel() {
         this.setVisible(false);
         this.dispose();

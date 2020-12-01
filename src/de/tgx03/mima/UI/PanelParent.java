@@ -1,5 +1,8 @@
 package de.tgx03.mima.UI;
 
+/**
+ * What the parent of a panel needs to be able to do
+ */
 public interface PanelParent {
 
     /**

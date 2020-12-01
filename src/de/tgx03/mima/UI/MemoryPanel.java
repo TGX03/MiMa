@@ -1,13 +1,16 @@
 package de.tgx03.mima.UI;
 
 import de.tgx03.mima.MiMa;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
+/**
+ * The panel responsible for showing and editing a MiMa's memory
+ */
 public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
 
     private static final String SEPARATOR = System.getProperty("line.separator");
@@ -19,22 +22,30 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
     private final JButton add = new JButton("add");
     private final JButton remove = new JButton("remove");
 
-    public MemoryPanel(MiMa mima, PanelParent parent) {
+    /**
+     * Creates a new Memory panel responsible for a MiMa's memory
+     * @param mima The MiMa instance this panel is responsible for
+     * @param parent The parent of this panel
+     */
+    public MemoryPanel(@NotNull MiMa mima, @NotNull PanelParent parent) {
+
+        // Assign the required objects
         this.parent = parent;
         this.instance = mima;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        // Add the memory of the MiMa to the list
         listModel.add(0, accu());
-        if (mima != null) {
-            String memory = instance.toString();
-            String[] splitMemory = memory.split(SEPARATOR);
-            listModel.addAll(Arrays.asList(splitMemory));
-        }
+        String memory = instance.toString();
+        String[] splitMemory = memory.split(SEPARATOR);
+        listModel.addAll(Arrays.asList(splitMemory));
 
+        // Add the list
         dataList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.add(new JScrollPane(dataList));
 
+        // Create the add and remove buttons
         JPanel buttons = new JPanel();
         add.addActionListener(this);
         buttons.add(add);
@@ -62,6 +73,9 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
         }
     }
 
+    /**
+     * Remove the currently selected value from memory
+     */
     private void removeData() {
         String selected = dataList.getSelectedValue();
         if (selected != null) {
@@ -71,6 +85,9 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
         }
     }
 
+    /**
+     * @return Create a String representing the accu of the MiMa
+     */
     private String accu() {
         return "accu: " + this.instance.getAccu();
     }
