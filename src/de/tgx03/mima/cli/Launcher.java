@@ -1,4 +1,6 @@
-package de.tgx03.mima;
+package de.tgx03.mima.cli;
+
+import de.tgx03.mima.MiMa;
 
 import java.io.IOException;
 import java.nio.file.Files;
