@@ -121,8 +121,14 @@ public class MiMa implements Runnable {
             return;
         }
         int[] commandResult;
-        synchronized (map) {
-            commandResult = commands.get(currentCommand).run(accu);
+        try {
+            synchronized (map) {
+                commandResult = commands.get(currentCommand).run(accu);
+            }
+        } catch (Throwable e) {
+            exit = true;
+            forcedExit = true;
+            return;
         }
         if (commands.get(currentCommand).updatesAccu()) {
             accu = commandResult[0];
