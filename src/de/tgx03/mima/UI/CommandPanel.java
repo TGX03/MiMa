@@ -138,6 +138,9 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel, L
         parent.update();
     }
 
+    /**
+     * Update the representation of the currently selected command
+     */
     private void updateCommandRepresentation() {
         int index = commandList.getSelectedIndex();
         if (index < 0) {
