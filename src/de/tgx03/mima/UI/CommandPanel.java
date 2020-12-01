@@ -69,12 +69,7 @@ public class CommandPanel extends JPanel implements ActionListener, MiMaPanel, L
 
     private void addCommand() {
         CommandCreator creator = new CommandCreator(instance);
-        if (creator.validCommandCreated()) {
-            Command newCommand = creator.getCreatedCommand();
-            int position = creator.commandPosition();
-            instance.addCommand(position, newCommand);
-            parent.update();
-        }
+        parent.update();
     }
 
     private void removeCommand() {

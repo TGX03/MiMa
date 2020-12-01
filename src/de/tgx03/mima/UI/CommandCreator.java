@@ -19,11 +19,6 @@ class CommandCreator extends JDialog implements ActionListener {
     private final JButton cancel = new JButton("Cancel");
     private final MiMa instance;
 
-
-    private int commandPosition;
-    private Command newCommand;
-    private boolean success = false;
-
     public CommandCreator(MiMa target) {
         this.instance = target;
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -48,26 +43,6 @@ class CommandCreator extends JDialog implements ActionListener {
         this.setVisible(true);
     }
 
-    public boolean validCommandCreated() {
-        return success;
-    }
-
-    public int commandPosition() {
-        if (success) {
-            return this.commandPosition;
-        } else {
-            throw new IllegalStateException("No valid command was created");
-        }
-    }
-
-    public Command getCreatedCommand() {
-        if (success) {
-            return newCommand;
-        } else {
-            throw new IllegalStateException("No valid command was created");
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ok) {
@@ -79,12 +54,11 @@ class CommandCreator extends JDialog implements ActionListener {
 
     private void ok() {
         try {
-            newCommand = instance.createCommand((String) commandList.getSelectedItem(), commandValue.getText());
-            commandPosition = Integer.parseInt(position.getText());
-            success = true;
+            Command newCommand = instance.createCommand((String) commandList.getSelectedItem(), commandValue.getText());
+            int commandPosition = Integer.parseInt(position.getText());
+            this.instance.addCommand(commandPosition, newCommand);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            success = false;
         } finally {
             this.setVisible(false);
             this.dispose();
