@@ -167,6 +167,14 @@ public class MiMa implements Runnable {
         }
     }
 
+    public boolean isBreakpoint(int position) {
+        if (this.breakpoints != null) {
+            return this.breakpoints.contains(position);
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Remove a breakpoint from this MiMa
      * @param breakpoint The number of the breakpoint to remove
