@@ -56,6 +56,7 @@ public class MainWindow extends JFrame implements ActionListener {
         this.pack();
         tabber.remove(0);
 
+        this.setTitle("MiMa Emulator");
         this.setVisible(true);
     }
 

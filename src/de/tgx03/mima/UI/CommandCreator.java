@@ -49,6 +49,7 @@ class CommandCreator extends JDialog implements ActionListener {
         this.setModalityType(ModalityType.APPLICATION_MODAL);
         this.setModal(true);
         this.setResizable(false);
+        this.setTitle("Create Command");
         this.setVisible(true);
     }
 

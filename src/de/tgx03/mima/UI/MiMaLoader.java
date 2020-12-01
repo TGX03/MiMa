@@ -32,7 +32,7 @@ class MiMaLoader extends JDialog implements ActionListener {
     private MiMa createdMiMa;
 
     public MiMaLoader() {
-        this.setTitle("Create a new MiMa");
+        this.setTitle("Load MiMa");
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         // This gets divided in three parallel columns

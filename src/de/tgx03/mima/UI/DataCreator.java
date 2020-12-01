@@ -41,6 +41,7 @@ class DataCreator extends JDialog implements ActionListener {
         this.setResizable(false);
         this.setModalityType(ModalityType.APPLICATION_MODAL);
         this.setModal(true);
+        this.setTitle("Add Data");
         this.setVisible(true);
     }
 
