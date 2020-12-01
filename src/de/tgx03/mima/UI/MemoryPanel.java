@@ -64,9 +64,11 @@ public class MemoryPanel extends JPanel implements ActionListener, MiMaPanel {
 
     private void removeData() {
         String selected = dataList.getSelectedValue();
-        String[] split = selected.split(": ");
-        instance.clearData(split[0]);
-        parent.update();
+        if (selected != null) {
+            String[] split = selected.split(": ");
+            instance.clearData(split[0]);
+            parent.update();
+        }
     }
 
     private String accu() {
