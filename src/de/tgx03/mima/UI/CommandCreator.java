@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 class CommandCreator extends JDialog implements ActionListener {
 
-    private static final Dimension initialSize = new Dimension(200, 150);
+    private static final Dimension spacer = new Dimension(10, 5);
 
     private final JComboBox<String> commandList = new JComboBox<>(new String[]{"ADD", "AND", "EQL", "HALT", "JMN", "JMP", "LDC", "LDV", "NOT", "OR", "RAR", "STV", "XOR"});
     private final JTextField commandValue = new JTextField("Command value");
@@ -28,16 +28,20 @@ class CommandCreator extends JDialog implements ActionListener {
         this.instance = target;
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.add(commandList);
+        this.add(Box.createRigidArea(spacer));
         this.add(commandValue);
+        this.add(Box.createRigidArea(spacer));
         this.add(position);
+        this.add(Box.createRigidArea(spacer));
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         ok.addActionListener(this);
         cancel.addActionListener(this);
         buttonPanel.add(ok);
+        buttonPanel.add(Box.createRigidArea(spacer));
         buttonPanel.add(cancel);
         this.add(buttonPanel);
-        this.setSize(initialSize);
+        this.pack();
         this.setModalityType(ModalityType.APPLICATION_MODAL);
         this.setModal(true);
         this.setVisible(true);
