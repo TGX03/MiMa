@@ -24,7 +24,7 @@ public class OR extends Command {
 
     @Override
     public int[] run(int currentAccu) {
-        int memoryValue = map.get(memoryAddress);
+        int memoryValue = read(memoryAddress);
         return new int[]{memoryValue | currentAccu, DONT_JUMP};
     }
 

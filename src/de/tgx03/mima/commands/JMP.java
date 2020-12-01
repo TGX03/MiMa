@@ -22,7 +22,7 @@ public class JMP extends Command {
 
     @Override
     public int[] run(int currentAccu) {
-        int newAddress = map.get(memoryAddress);
+        int newAddress = read(memoryAddress);
         return new int[]{-1, newAddress};
     }
 

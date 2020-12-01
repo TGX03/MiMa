@@ -22,7 +22,7 @@ public class LDV extends Command {
 
     @Override
     public int[] run(int currentAccu) {
-        return new int[]{map.get(memoryAddress), DONT_JUMP};
+        return new int[]{read(memoryAddress), DONT_JUMP};
     }
 
     @Override

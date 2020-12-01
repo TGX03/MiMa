@@ -1,6 +1,7 @@
 package de.tgx03.mima.commands;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A class representing the basic structure of a MiMa command
@@ -17,7 +18,7 @@ public abstract class Command {
      */
     public static final int DONT_JUMP = -1;
 
-    protected final Map<String, Integer> map;
+    private final Map<String, Integer> map;
 
     /**
      * @param map The map representing memory
@@ -43,5 +44,15 @@ public abstract class Command {
      */
     public boolean updatesAccu() {
         return true;
+    }
+
+    protected void write(String memoryAddress, int value) {
+        map.remove(memoryAddress);
+        map.put(memoryAddress, value);
+    }
+
+    protected int read(String memoryAddress) {
+        Integer result = map.get(memoryAddress);
+        return Objects.requireNonNullElse(result, 0);
     }
 }

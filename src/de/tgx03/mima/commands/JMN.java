@@ -26,7 +26,7 @@ public class JMN extends Command {
     @Override
     public int[] run(int currentAccu) {
         if (currentAccu < 0) {
-            int newAddress = map.get(memoryAddress);
+            int newAddress = read(memoryAddress);
             return new int[]{-1, newAddress};
         } else {
             return new int[]{-1, DONT_JUMP};

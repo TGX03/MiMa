@@ -26,7 +26,7 @@ public class EQL extends Command {
 
     @Override
     public int[] run(int currentAccu) {
-        int memoryValue = map.get(memoryAddress);
+        int memoryValue = read(memoryAddress);
         return new int[]{currentAccu == memoryValue ? -1 : 0, DONT_JUMP};
     }
 

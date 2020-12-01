@@ -24,7 +24,7 @@ public class STV extends Command {
 
     @Override
     public int[] run(int currentAccu) {
-        map.put(memoryAddress, currentAccu);
+        write(memoryAddress, currentAccu);
         return new int[]{-1, DONT_JUMP};
     }
 

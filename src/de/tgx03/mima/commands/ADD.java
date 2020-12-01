@@ -25,7 +25,7 @@ public class ADD extends Command {
 
     @Override
     public int[] run(int currentAccu) {
-        int memoryValue = map.get(memoryAddress);
+        int memoryValue = read(memoryAddress);
         return new int[]{currentAccu + memoryValue, DONT_JUMP};
     }
 
