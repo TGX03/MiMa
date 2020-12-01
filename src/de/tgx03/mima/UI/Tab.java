@@ -69,6 +69,10 @@ class Tab extends JPanel implements PanelParent, ActionListener {
         }
     }
 
+    protected MiMa getInstance() {
+        return this.instance;
+    }
+
     private static class ExitNotifier implements Runnable {
 
         private final Runnable instance;
