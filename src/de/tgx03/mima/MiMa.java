@@ -15,7 +15,7 @@ public class MiMa implements Runnable {
     private final ArrayList<Command> commands;
     private final HashMap<String, Integer> map = new HashMap<>();
     private final HashMap<String, Integer> originalMap = new HashMap<>();
-    private boolean exit = false;
+    private volatile boolean exit = false;
     private boolean forcedExit = false;
     private int accu;
     int currentCommand = 0;
